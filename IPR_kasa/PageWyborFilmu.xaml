@@ -1,0 +1,62 @@
+﻿<Page x:Class="IPR_kasa.PageWyborFilmu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IPR_kasa"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageWyborFilmu">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Height="400" Grid.Column="0" Margin="70,24,0,26">
+
+            <!--<StackPanel Orientation="Horizontal" Width="300 " Grid.Row="2" Margin="10,48,193.189,-48">
+                <TextBlock Foreground="Blue" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Odyseja kosmiczna" VerticalAlignment="Top" TextDecorations="Underline" Height="27" Width="112" />
+                <Label Content="17:00" BorderBrush="Black" BorderThickness="0.7"  HorizontalAlignment="Left"  VerticalAlignment="Top" Width="42" Height="27" Background="#FF739EE8"/>
+                <Label Content="19:00" BorderBrush="Black" BorderThickness="0.7" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Height="27" Background="#FF739EE8"/>
+                <Label Content="21:00" BorderBrush="Black" BorderThickness="0.7" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Height="27" Background="#FF739EE8"/>
+            </StackPanel>-->
+
+            <ItemsControl ItemsSource="{Binding}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,10">
+                            <TextBlock Foreground="Blue" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Key}" VerticalAlignment="Top" TextDecorations="Underline" Height="27" Width="112"/>
+                            <ItemsControl ItemsSource="{Binding Value}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel >
+                                            <Button Content="{Binding}" BorderBrush="Black" BorderThickness="0.7"  Width="42" Height="27" Background="#FF739EE8" Click="Button_Godzina" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </Grid>
+
+        <StackPanel Grid.Column="1" Margin="66,41,34,259">
+            <Button Content="Realizuj zniżkę" Height="40" Margin="5,15" Click="Button_Realizuj" />
+            <Button Content="Zatwierdź zniżkę" Height="40" Margin="5,1" Click="Button_Zatwierdz" />
+        </StackPanel>
+    </Grid>
+
+</Page>
