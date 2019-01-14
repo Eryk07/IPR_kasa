@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,6 +23,8 @@ namespace IPR_kasa
     /// </summary>
     public partial class PageWyborFilmu : Page
     {
+        private COrder order;
+        private bool titleSelected = false;
         public PageWyborFilmu()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace IPR_kasa
 
                 DataContext = MoviesDict;
             }
-
+            order = new COrder();
         }
 
         private void Button_Realizuj(object sender, RoutedEventArgs e)
@@ -44,11 +47,35 @@ namespace IPR_kasa
             this.NavigationService.Navigate(new Uri("PageZatwierdzZnizke2.xaml", UriKind.Relative));
         }
 
+        private void Button_Tytul(object sender, RoutedEventArgs e)
+        {
+            ToggleButton srcButton = e.Source as ToggleButton;
+            var textblock = (TextBlock)srcButton.Content;
+            order.title = textblock.Text.ToString();
+            titleSelected = true;
+
+        }
+
         private void Button_Godzina(object sender, RoutedEventArgs e)
         {
+            Button srcButton = e.Source as Button;
 
-            this.NavigationService.Navigate(new Uri("PagePodsumowanie.xaml", UriKind.Relative));
+            order.seance_time = srcButton.Content.ToString();
+
+            //var dict = (KeyValuePair<string,List<String>>)itemsControl.Items.CurrentItem;
+            // string tilte  = dict.Key; 
+            if (titleSelected)
+            {
+                saveOrderToDatabase();
+                this.NavigationService.Navigate(new Uri("PagePodsumowanie.xaml", UriKind.Relative));
+            }
+            else
+            {
+                MessageBox.Show("Zanim wybierzesz godzinę, najpierw wybierz tytuł który jest do niej przypisany", "Błąd",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private Dictionary<string, List<string>> WriteSeances()
         {
@@ -71,6 +98,46 @@ namespace IPR_kasa
             }
             return seances;
             
+        }
+
+        void saveOrderToDatabase()
+        {
+            //DateTime.Now
+
+            // Add the new object to the Orders collection.
+            
+            Order record = new Order();
+            using (var db = new MultikinoLINQDataContext(
+            Properties.Settings.Default.MultikinoConnectionString))
+            {
+                var last_id = db.Order
+                             .OrderByDescending(x => x.id)
+                             .Take(1)
+                             .Select(x => x.id)
+                             .ToList()
+                             .FirstOrDefault();
+
+                record.id = last_id + 1;
+            }
+
+            record.title = order.title;
+            record.order_time = DateTime.Now;
+            record.seance_time = TimeSpan.Parse(order.seance_time);
+
+            MainWindow.dc.Order.InsertOnSubmit(record);
+            // Submit the change to the database.
+            try
+            {
+                MainWindow.dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Make some adjustments.
+                // ...
+                // Try again.
+                MainWindow.dc.SubmitChanges();
+            }
         }
 
     }
@@ -110,4 +177,17 @@ namespace IPR_kasa
 
        
     }
-}
+    public class COrder
+    {
+        public int id { get; set; }
+        public string title { get; set; }
+        public string seance_time { get; set; }
+
+        public COrder()
+        {
+            this.title = "";
+            this.seance_time = "";
+        }
+    }
+    
+    }

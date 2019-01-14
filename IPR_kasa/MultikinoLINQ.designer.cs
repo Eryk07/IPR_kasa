@@ -36,6 +36,9 @@ namespace IPR_kasa
     partial void InsertSeance(Seance instance);
     partial void UpdateSeance(Seance instance);
     partial void DeleteSeance(Seance instance);
+    partial void InsertOrder(Order instance);
+    partial void UpdateOrder(Order instance);
+    partial void DeleteOrder(Order instance);
     #endregion
 		
 		public MultikinoLINQDataContext() : 
@@ -81,6 +84,14 @@ namespace IPR_kasa
 			get
 			{
 				return this.GetTable<Seance>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Order> Order
+		{
+			get
+			{
+				return this.GetTable<Order>();
 			}
 		}
 	}
@@ -373,6 +384,140 @@ namespace IPR_kasa
 						this._id_movie = default(int);
 					}
 					this.SendPropertyChanged("Movies");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Order]")]
+	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.TimeSpan _seance_time;
+		
+		private System.DateTime _order_time;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onseance_timeChanging(System.TimeSpan value);
+    partial void Onseance_timeChanged();
+    partial void Onorder_timeChanging(System.DateTime value);
+    partial void Onorder_timeChanged();
+    #endregion
+		
+		public Order()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seance_time", DbType="Time NOT NULL")]
+		public System.TimeSpan seance_time
+		{
+			get
+			{
+				return this._seance_time;
+			}
+			set
+			{
+				if ((this._seance_time != value))
+				{
+					this.Onseance_timeChanging(value);
+					this.SendPropertyChanging();
+					this._seance_time = value;
+					this.SendPropertyChanged("seance_time");
+					this.Onseance_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_time", DbType="DateTime NOT NULL")]
+		public System.DateTime order_time
+		{
+			get
+			{
+				return this._order_time;
+			}
+			set
+			{
+				if ((this._order_time != value))
+				{
+					this.Onorder_timeChanging(value);
+					this.SendPropertyChanging();
+					this._order_time = value;
+					this.SendPropertyChanged("order_time");
+					this.Onorder_timeChanged();
 				}
 			}
 		}

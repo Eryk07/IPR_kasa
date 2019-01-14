@@ -22,7 +22,7 @@
                 <Label Content="21:00" BorderBrush="Black" BorderThickness="0.7" HorizontalAlignment="Left" VerticalAlignment="Top" Width="42" Height="27" Background="#FF739EE8"/>
             </StackPanel>-->
 
-            <ItemsControl ItemsSource="{Binding}" >
+            <ItemsControl ItemsSource="{Binding}" Name="itemsControl" >
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel/>
@@ -31,7 +31,21 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal" Margin="10,10">
-                            <TextBlock Foreground="Blue" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Key}" VerticalAlignment="Top" TextDecorations="Underline" Height="27" Width="112"/>
+
+                            <ToggleButton Name ="titleBtn" Height="27" Width="112" BorderBrush="Transparent" Background="Transparent" Click="Button_Tytul">
+                                <TextBlock Foreground="Blue" HorizontalAlignment="Left" Text="{Binding Key}" VerticalAlignment="Top"  TextDecorations="Underline">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ElementName=titleBtn, Path=IsChecked}" Value="True">
+                                                    <Setter Property="FontWeight" Value="Bold" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </ToggleButton>
+                            
                             <ItemsControl ItemsSource="{Binding Value}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
