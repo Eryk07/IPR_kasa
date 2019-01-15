@@ -1,28 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Multikino" Class="MultikinoLINQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=Multikino;Integrated Security=True" SettingsObjectName="IPR_kasa.Properties.Settings" SettingsPropertyName="MultikinoConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Movies" Member="Movies">
-    <Type Name="Movies">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="link_filmweb" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Association Name="Movies_Seance" Member="Seance" ThisKey="id" OtherKey="id_movie" Type="Seance" />
-    </Type>
-  </Table>
   <Table Name="dbo.Seance" Member="Seance">
     <Type Name="Seance">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="time" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="id_movie" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Movies_Seance" Member="Movies" ThisKey="id_movie" OtherKey="id" Type="Movies" IsForeignKey="true" />
+      <Association Name="Seance_Order" Member="Order" ThisKey="id" OtherKey="id_seance" Type="Order" />
+      <Association Name="Movie_Seance" Member="Movie" ThisKey="id_movie" OtherKey="id" Type="Movie" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Movie" Member="Movie">
+    <Type Name="Movie">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Movie_Seance" Member="Seance" ThisKey="id" OtherKey="id_movie" Type="Seance" />
     </Type>
   </Table>
   <Table Name="dbo.[Order]" Member="Order">
     <Type Name="Order">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="seance_time" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
       <Column Name="order_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="id_seance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="seat_number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Seance_Order" Member="Seance" ThisKey="id_seance" OtherKey="id" Type="Seance" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

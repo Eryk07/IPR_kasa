@@ -2,30 +2,37 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MultikinoLINQ">
   <DataContextMoniker Name="/MultikinoLINQDataContext" />
   <nestedChildShapes>
-    <classShape Id="cbd5275e-4582-4b6d-9179-75d5a7aaf2ec" absoluteBounds="5, 2.125, 2, 1.3862939453125">
-      <DataClassMoniker Name="/MultikinoLINQDataContext/Movies" />
-      <nestedChildShapes>
-        <elementListCompartment Id="596870ec-50ad-4e9f-906d-b097c6c17029" absoluteBounds="5.015, 2.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="8e09d9dc-09db-441e-a7f1-08905f3ceb90" absoluteBounds="2.75, 2, 2, 1.5785953776041666">
+    <classShape Id="8e09d9dc-09db-441e-a7f1-08905f3ceb90" absoluteBounds="2.875, 3, 2, 1.5785953776041666">
       <DataClassMoniker Name="/MultikinoLINQDataContext/Seance" />
       <nestedChildShapes>
-        <elementListCompartment Id="69d374ee-5f40-40ce-8226-9792f18e3cb4" absoluteBounds="2.7649999999999997, 2.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="69d374ee-5f40-40ce-8226-9792f18e3cb4" absoluteBounds="2.8899999999999997, 3.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5 : 2.81814697265625); (4.75 : 2.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/MultikinoLINQDataContext/Movies/Movies_Seance" />
+    <classShape Id="d0fa05e7-6506-49fe-8ad0-578bd770e772" absoluteBounds="5.875, 2.75, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/MultikinoLINQDataContext/Movie" />
+      <nestedChildShapes>
+        <elementListCompartment Id="984c45cf-51ad-4c10-8c84-fbcca8a9503f" absoluteBounds="5.89, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.875 : 3.47199625651042); (4.875 : 3.47199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/MultikinoLINQDataContext/Movie/Movie_Seance" />
       <nodes>
-        <classShapeMoniker Id="cbd5275e-4582-4b6d-9179-75d5a7aaf2ec" />
+        <classShapeMoniker Id="d0fa05e7-6506-49fe-8ad0-578bd770e772" />
         <classShapeMoniker Id="8e09d9dc-09db-441e-a7f1-08905f3ceb90" />
       </nodes>
     </associationConnector>
-    <classShape Id="2772b84b-ca47-450c-8790-dc26c597dd04" absoluteBounds="0.5, 0.625, 2, 1.5785953776041666">
+    <classShape Id="4965352e-0e7a-4403-9124-1acce6c96cda" absoluteBounds="0.875, 0.625, 2, 1.9631982421875">
       <DataClassMoniker Name="/MultikinoLINQDataContext/Order" />
       <nestedChildShapes>
-        <elementListCompartment Id="2190bae0-1c71-4e55-bf8f-59d1020b8fff" absoluteBounds="0.51500000000000012, 1.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="311ca5dc-0e16-41a8-8412-ce8448916e03" absoluteBounds="0.89000000000000012, 1.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <associationConnector edgePoints="[(3.8750005 : 3); (3.8750005 : 1.60659912109375); (2.875 : 1.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MultikinoLINQDataContext/Seance/Seance_Order" />
+      <nodes>
+        <classShapeMoniker Id="8e09d9dc-09db-441e-a7f1-08905f3ceb90" />
+        <classShapeMoniker Id="4965352e-0e7a-4403-9124-1acce6c96cda" />
+      </nodes>
+    </associationConnector>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

@@ -30,12 +30,12 @@ namespace IPR_kasa
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertMovies(Movies instance);
-    partial void UpdateMovies(Movies instance);
-    partial void DeleteMovies(Movies instance);
     partial void InsertSeance(Seance instance);
     partial void UpdateSeance(Seance instance);
     partial void DeleteSeance(Seance instance);
+    partial void InsertMovie(Movie instance);
+    partial void UpdateMovie(Movie instance);
+    partial void DeleteMovie(Movie instance);
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
@@ -71,19 +71,19 @@ namespace IPR_kasa
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Movies> Movies
-		{
-			get
-			{
-				return this.GetTable<Movies>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Seance> Seance
 		{
 			get
 			{
 				return this.GetTable<Seance>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Movie> Movie
+		{
+			get
+			{
+				return this.GetTable<Movie>();
 			}
 		}
 		
@@ -93,144 +93,6 @@ namespace IPR_kasa
 			{
 				return this.GetTable<Order>();
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Movies")]
-	public partial class Movies : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private string _link_filmweb;
-		
-		private EntitySet<Seance> _Seance;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void Onlink_filmwebChanging(string value);
-    partial void Onlink_filmwebChanged();
-    #endregion
-		
-		public Movies()
-		{
-			this._Seance = new EntitySet<Seance>(new Action<Seance>(this.attach_Seance), new Action<Seance>(this.detach_Seance));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_link_filmweb", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string link_filmweb
-		{
-			get
-			{
-				return this._link_filmweb;
-			}
-			set
-			{
-				if ((this._link_filmweb != value))
-				{
-					this.Onlink_filmwebChanging(value);
-					this.SendPropertyChanging();
-					this._link_filmweb = value;
-					this.SendPropertyChanged("link_filmweb");
-					this.Onlink_filmwebChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movies_Seance", Storage="_Seance", ThisKey="id", OtherKey="id_movie")]
-		public EntitySet<Seance> Seance
-		{
-			get
-			{
-				return this._Seance;
-			}
-			set
-			{
-				this._Seance.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Seance(Seance entity)
-		{
-			this.SendPropertyChanging();
-			entity.Movies = this;
-		}
-		
-		private void detach_Seance(Seance entity)
-		{
-			this.SendPropertyChanging();
-			entity.Movies = null;
 		}
 	}
 	
@@ -248,7 +110,9 @@ namespace IPR_kasa
 		
 		private int _id_movie;
 		
-		private EntityRef<Movies> _Movies;
+		private EntitySet<Order> _Order;
+		
+		private EntityRef<Movie> _Movie;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -266,7 +130,8 @@ namespace IPR_kasa
 		
 		public Seance()
 		{
-			this._Movies = default(EntityRef<Movies>);
+			this._Order = new EntitySet<Order>(new Action<Order>(this.attach_Order), new Action<Order>(this.detach_Order));
+			this._Movie = default(EntityRef<Movie>);
 			OnCreated();
 		}
 		
@@ -341,7 +206,7 @@ namespace IPR_kasa
 			{
 				if ((this._id_movie != value))
 				{
-					if (this._Movies.HasLoadedOrAssignedValue)
+					if (this._Movie.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -354,26 +219,39 @@ namespace IPR_kasa
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movies_Seance", Storage="_Movies", ThisKey="id_movie", OtherKey="id", IsForeignKey=true)]
-		public Movies Movies
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seance_Order", Storage="_Order", ThisKey="id", OtherKey="id_seance")]
+		public EntitySet<Order> Order
 		{
 			get
 			{
-				return this._Movies.Entity;
+				return this._Order;
 			}
 			set
 			{
-				Movies previousValue = this._Movies.Entity;
+				this._Order.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_Seance", Storage="_Movie", ThisKey="id_movie", OtherKey="id", IsForeignKey=true)]
+		public Movie Movie
+		{
+			get
+			{
+				return this._Movie.Entity;
+			}
+			set
+			{
+				Movie previousValue = this._Movie.Entity;
 				if (((previousValue != value) 
-							|| (this._Movies.HasLoadedOrAssignedValue == false)))
+							|| (this._Movie.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._Movies.Entity = null;
+						this._Movie.Entity = null;
 						previousValue.Seance.Remove(this);
 					}
-					this._Movies.Entity = value;
+					this._Movie.Entity = value;
 					if ((value != null))
 					{
 						value.Seance.Add(this);
@@ -383,7 +261,7 @@ namespace IPR_kasa
 					{
 						this._id_movie = default(int);
 					}
-					this.SendPropertyChanged("Movies");
+					this.SendPropertyChanged("Movie");
 				}
 			}
 		}
@@ -407,10 +285,22 @@ namespace IPR_kasa
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_Order(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Seance = this;
+		}
+		
+		private void detach_Order(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Seance = null;
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Order]")]
-	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Movie")]
+	public partial class Movie : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -419,9 +309,7 @@ namespace IPR_kasa
 		
 		private string _title;
 		
-		private System.TimeSpan _seance_time;
-		
-		private System.DateTime _order_time;
+		private EntitySet<Seance> _Seance;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -431,14 +319,11 @@ namespace IPR_kasa
     partial void OnidChanged();
     partial void OntitleChanging(string value);
     partial void OntitleChanged();
-    partial void Onseance_timeChanging(System.TimeSpan value);
-    partial void Onseance_timeChanged();
-    partial void Onorder_timeChanging(System.DateTime value);
-    partial void Onorder_timeChanged();
     #endregion
 		
-		public Order()
+		public Movie()
 		{
+			this._Seance = new EntitySet<Seance>(new Action<Seance>(this.attach_Seance), new Action<Seance>(this.detach_Seance));
 			OnCreated();
 		}
 		
@@ -462,7 +347,137 @@ namespace IPR_kasa
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Movie_Seance", Storage="_Seance", ThisKey="id", OtherKey="id_movie")]
+		public EntitySet<Seance> Seance
+		{
+			get
+			{
+				return this._Seance;
+			}
+			set
+			{
+				this._Seance.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Seance(Seance entity)
+		{
+			this.SendPropertyChanging();
+			entity.Movie = this;
+		}
+		
+		private void detach_Seance(Seance entity)
+		{
+			this.SendPropertyChanging();
+			entity.Movie = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Order]")]
+	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.TimeSpan _seance_time;
+		
+		private System.DateTime _order_time;
+		
+		private int _id_seance;
+		
+		private int _seat_number;
+		
+		private EntityRef<Seance> _Seance;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onseance_timeChanging(System.TimeSpan value);
+    partial void Onseance_timeChanged();
+    partial void Onorder_timeChanging(System.DateTime value);
+    partial void Onorder_timeChanged();
+    partial void Onid_seanceChanging(int value);
+    partial void Onid_seanceChanged();
+    partial void Onseat_numberChanging(int value);
+    partial void Onseat_numberChanged();
+    #endregion
+		
+		public Order()
+		{
+			this._Seance = default(EntityRef<Seance>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string title
 		{
 			get
@@ -518,6 +533,84 @@ namespace IPR_kasa
 					this._order_time = value;
 					this.SendPropertyChanged("order_time");
 					this.Onorder_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_seance", DbType="Int NOT NULL")]
+		public int id_seance
+		{
+			get
+			{
+				return this._id_seance;
+			}
+			set
+			{
+				if ((this._id_seance != value))
+				{
+					if (this._Seance.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_seanceChanging(value);
+					this.SendPropertyChanging();
+					this._id_seance = value;
+					this.SendPropertyChanged("id_seance");
+					this.Onid_seanceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seat_number", DbType="Int NOT NULL")]
+		public int seat_number
+		{
+			get
+			{
+				return this._seat_number;
+			}
+			set
+			{
+				if ((this._seat_number != value))
+				{
+					this.Onseat_numberChanging(value);
+					this.SendPropertyChanging();
+					this._seat_number = value;
+					this.SendPropertyChanged("seat_number");
+					this.Onseat_numberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seance_Order", Storage="_Seance", ThisKey="id_seance", OtherKey="id", IsForeignKey=true)]
+		public Seance Seance
+		{
+			get
+			{
+				return this._Seance.Entity;
+			}
+			set
+			{
+				Seance previousValue = this._Seance.Entity;
+				if (((previousValue != value) 
+							|| (this._Seance.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Seance.Entity = null;
+						previousValue.Order.Remove(this);
+					}
+					this._Seance.Entity = value;
+					if ((value != null))
+					{
+						value.Order.Add(this);
+						this._id_seance = value.id;
+					}
+					else
+					{
+						this._id_seance = default(int);
+					}
+					this.SendPropertyChanged("Seance");
 				}
 			}
 		}

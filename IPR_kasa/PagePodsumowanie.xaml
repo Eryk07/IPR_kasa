@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IPR_kasa"
+     
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PagePodsumowanie">
@@ -18,80 +19,53 @@
             <StackPanel>
                 <Label Content="Ekran" HorizontalAlignment="Center" Margin="86,5,86,1" />
                 <Rectangle  HorizontalAlignment="Left" Height="12" Width="210" Margin="86,1,86,10" Stroke="Black"/>
-
-                <Grid Height="130" Margin="86,10,86,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-
-                    </Grid.ColumnDefinitions>
-
-                    <Button Background="Green" Grid.Row="0" Grid.Column="0" Content="1" />
-                    <Button Background="Green"  Grid.Row="0" Grid.Column="1" Content="2" />
-                    <Button Background="Red" Grid.Row="0" Grid.Column="2" Content="3" />
-                    <Button Background="Green"  Grid.Row="0" Grid.Column="3" Content="4" />
-                    <Button Background="Red" Grid.Row="0" Grid.Column="4" Content="5" />
-                    <Button Background="Green"  Grid.Row="0" Grid.Column="5" Content="6" />
-                    <Button Background="Green"  Grid.Row="0" Grid.Column="6" Content="7" />
-                    <Button Background="Green"  Grid.Row="0" Grid.Column="7" Content="8" />
-
-                    <Button Background="Green"  Grid.Row="1" Grid.Column="0" Content="9" />
-                    <Button Background="Green"  Grid.Row="1" Grid.Column="1" Content="10" />
-                    <Button Background="Green"  Grid.Row="1" Grid.Column="2" Content="11" />
-                    <Button Background="CornflowerBlue"  Grid.Row="1" Grid.Column="3" Content="12" />
-                    <Button Background="CornflowerBlue"  Grid.Row="1" Grid.Column="4" Content="13" />
-                    <Button Background="Green"  Grid.Row="1" Grid.Column="5" Content="14" />
-                    <Button Background="Green"  Grid.Row="1" Grid.Column="6" Content="15" />
-                    <Button Background="Green"  Grid.Row="1" Grid.Column="7" Content="16" />
-
-                    <Button Background="Green"  Grid.Row="2" Grid.Column="0" Content="17" />
-                    <Button Background="Green"  Grid.Row="2" Grid.Column="1" Content="18" />
-                    <Button Background="Green"  Grid.Row="2" Grid.Column="2" Content="19" />
-                    <Button Background="Red"  Grid.Row="2" Grid.Column="3" Content="20" />
-                    <Button Background="Red"  Grid.Row="2" Grid.Column="4" Content="21" />
-                    <Button Background="Green"  Grid.Row="2" Grid.Column="5" Content="22" />
-                    <Button Background="Green"  Grid.Row="2" Grid.Column="6" Content="23" />
-                    <Button Background="Green"  Grid.Row="2" Grid.Column="7" Content="24" />
-
-                </Grid>
-
+                <ItemsControl ItemsSource="{Binding}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" Width="230"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton  Content="{Binding Path=id}" BorderBrush="Black" BorderThickness="0.7"  Width="28" Height="35" Background="Green" x:Name="seatBtn" Click="Seat_Click">
+                                <ToggleButton.Style>
+                                    <Style TargetType="{x:Type ToggleButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ElementName=seatBtn, Path=IsChecked}" Value="True">
+                                                <Setter Property="Background" Value="CornflowerBlue" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ToggleButton.Style>
+                            </ToggleButton>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding Path=available}" Value="False">
+                                    <Setter Property="Background" Value="Red" TargetName="seatBtn" />
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
-
 
         </StackPanel>
 
         <StackPanel Grid.Column="1">
-            <Label FontWeight="Bold" Content="Planeta singli 2, 14.12, 16:00" HorizontalAlignment="Center" Margin="86,20,86,1" />
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="86,10,8,10" Height="130" >
+            <Label FontWeight="Bold" Name="titleLbl" HorizontalAlignment="Center" Margin="86,20,86,1" />
+            <StackPanel Orientation="Horizontal" Height="170">
+                <StackPanel Margin="86,10,8,10" Height="130" Width="259" >
                     <Label Content="Miejsce" />
-                    <StackPanel Width="40"  HorizontalAlignment="Center" VerticalAlignment="Center" >
-                        <Button Background="CornflowerBlue" Content="12" Height="40"/>
-                        <Button Background="CornflowerBlue" Content="13" Height="40" />
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel>
-                    <ComboBox Margin="60,40,10,15" Height="30">
-                        <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
-                        <ComboBoxItem IsSelected="True">Student</ComboBoxItem>
-                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
-                    </ComboBox>
-                    <ComboBox Margin="60,0,10,20" Height="30">
-                        <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
-                        <ComboBoxItem IsSelected="True">Twoja zniżka</ComboBoxItem>
-                        <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
-                    </ComboBox>
+                    <ItemsControl ItemsSource="{Binding summarySeats}" Name="seatsList">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding }"/>
+                            <ComboBox  Height="30">
+                                <ComboBoxItem IsSelected="True">Normalny</ComboBoxItem>
+                                <ComboBoxItem>Student</ComboBoxItem>
+                                <ComboBoxItem>Twoja zniżka</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </ItemsControl>
+
                 </StackPanel>
             </StackPanel>
             <Button Content="Zaakceptuj" Width="141" Height="30"  Margin="186,100,17,0" Click="Zaakceptuj_Click"  />

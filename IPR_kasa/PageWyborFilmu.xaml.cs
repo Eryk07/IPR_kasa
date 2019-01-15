@@ -23,7 +23,7 @@ namespace IPR_kasa
     /// </summary>
     public partial class PageWyborFilmu : Page
     {
-        private COrder order;
+        public static COrder order { get; set; }
         private bool titleSelected = false;
         public PageWyborFilmu()
         {
@@ -53,6 +53,7 @@ namespace IPR_kasa
             var textblock = (TextBlock)srcButton.Content;
             order.title = textblock.Text.ToString();
             titleSelected = true;
+            
 
         }
 
@@ -66,7 +67,25 @@ namespace IPR_kasa
             // string tilte  = dict.Key; 
             if (titleSelected)
             {
-                saveOrderToDatabase();
+                using (var db = new MultikinoLINQDataContext(
+                Properties.Settings.Default.MultikinoConnectionString))
+                {
+                    var movie_id = db
+                                 .Movie
+                                 //.Where(x => System.Data.Linq.SqlClient.SqlMethods.Like(x.title, order.title))
+                                 .Where(x => x.title.Equals(order.title))
+                                 .Select(x => x.id)
+                                 .ToList()
+                                 .FirstOrDefault();
+                    var seance_id = db
+                                 .Seance
+                                 .Where(x => x.id_movie == movie_id && x.time == TimeSpan.Parse(order.seance_time) && x.date == DateTime.Today)
+                                 .Select(x => x.id)
+                                 .ToList()
+                                 .FirstOrDefault();
+                    order.id_seance = seance_id;
+
+                }
                 this.NavigationService.Navigate(new Uri("PagePodsumowanie.xaml", UriKind.Relative));
             }
             else
@@ -84,7 +103,7 @@ namespace IPR_kasa
             using (var db = new MultikinoLINQDataContext(
             Properties.Settings.Default.MultikinoConnectionString))
             {
-                var movies = db.Movies
+                var movies = db.Movie
                 .Select(o => o.id)
                 .ToList();
 
@@ -100,46 +119,6 @@ namespace IPR_kasa
             
         }
 
-        void saveOrderToDatabase()
-        {
-            //DateTime.Now
-
-            // Add the new object to the Orders collection.
-            
-            Order record = new Order();
-            using (var db = new MultikinoLINQDataContext(
-            Properties.Settings.Default.MultikinoConnectionString))
-            {
-                var last_id = db.Order
-                             .OrderByDescending(x => x.id)
-                             .Take(1)
-                             .Select(x => x.id)
-                             .ToList()
-                             .FirstOrDefault();
-
-                record.id = last_id + 1;
-            }
-
-            record.title = order.title;
-            record.order_time = DateTime.Now;
-            record.seance_time = TimeSpan.Parse(order.seance_time);
-
-            MainWindow.dc.Order.InsertOnSubmit(record);
-            // Submit the change to the database.
-            try
-            {
-                MainWindow.dc.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Make some adjustments.
-                // ...
-                // Try again.
-                MainWindow.dc.SubmitChanges();
-            }
-        }
-
     }
 
     public class CSeance
@@ -147,6 +126,7 @@ namespace IPR_kasa
         public int id { get; set; }
         public string title { get; set; }
         public List<string> hoursList { get; set; }
+        
 
         public CSeance()
         {
@@ -165,7 +145,7 @@ namespace IPR_kasa
                 .Select(o => o.time)
                 .ToList();
 
-               var title = db.Movies.Where(o => o.id == id).Select(o => o.title).ToList();
+               var title = db.Movie.Where(o => o.id == id).Select(o => o.title).ToList();
                 this.title = title.First();
 
                 var seancesAsString = seances.Select(s => s.ToString(@"hh\:mm")).ToList();
@@ -182,11 +162,16 @@ namespace IPR_kasa
         public int id { get; set; }
         public string title { get; set; }
         public string seance_time { get; set; }
+        public int id_seance { get; set; }
+        public List<int> seat_id { get; set; }
+
 
         public COrder()
         {
             this.title = "";
             this.seance_time = "";
+            this.seat_id = new List<int>();
+
         }
     }
     
