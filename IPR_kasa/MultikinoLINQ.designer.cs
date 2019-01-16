@@ -39,6 +39,12 @@ namespace IPR_kasa
     partial void InsertOrder(Order instance);
     partial void UpdateOrder(Order instance);
     partial void DeleteOrder(Order instance);
+    partial void InsertClient(Client instance);
+    partial void UpdateClient(Client instance);
+    partial void DeleteClient(Client instance);
+    partial void InsertDiscount(Discount instance);
+    partial void UpdateDiscount(Discount instance);
+    partial void DeleteDiscount(Discount instance);
     #endregion
 		
 		public MultikinoLINQDataContext() : 
@@ -92,6 +98,22 @@ namespace IPR_kasa
 			get
 			{
 				return this.GetTable<Order>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Client> Client
+		{
+			get
+			{
+				return this.GetTable<Client>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Discount> Discount
+		{
+			get
+			{
+				return this.GetTable<Discount>();
 			}
 		}
 	}
@@ -633,6 +655,271 @@ namespace IPR_kasa
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
+	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Nullable<int> _id_znizka;
+		
+		private EntityRef<Discount> _Discount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onid_znizkaChanging(System.Nullable<int> value);
+    partial void Onid_znizkaChanged();
+    #endregion
+		
+		public Client()
+		{
+			this._Discount = default(EntityRef<Discount>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_znizka", DbType="Int")]
+		public System.Nullable<int> id_znizka
+		{
+			get
+			{
+				return this._id_znizka;
+			}
+			set
+			{
+				if ((this._id_znizka != value))
+				{
+					if (this._Discount.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_znizkaChanging(value);
+					this.SendPropertyChanging();
+					this._id_znizka = value;
+					this.SendPropertyChanged("id_znizka");
+					this.Onid_znizkaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Client", Storage="_Discount", ThisKey="id_znizka", OtherKey="id", IsForeignKey=true)]
+		public Discount Discount
+		{
+			get
+			{
+				return this._Discount.Entity;
+			}
+			set
+			{
+				Discount previousValue = this._Discount.Entity;
+				if (((previousValue != value) 
+							|| (this._Discount.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Discount.Entity = null;
+						previousValue.Client.Remove(this);
+					}
+					this._Discount.Entity = value;
+					if ((value != null))
+					{
+						value.Client.Add(this);
+						this._id_znizka = value.id;
+					}
+					else
+					{
+						this._id_znizka = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Discount");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Discount")]
+	public partial class Discount : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _znizka;
+		
+		private decimal _discount_rate;
+		
+		private EntitySet<Client> _Client;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnznizkaChanging(string value);
+    partial void OnznizkaChanged();
+    partial void Ondiscount_rateChanging(decimal value);
+    partial void Ondiscount_rateChanged();
+    #endregion
+		
+		public Discount()
+		{
+			this._Client = new EntitySet<Client>(new Action<Client>(this.attach_Client), new Action<Client>(this.detach_Client));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_znizka", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string znizka
+		{
+			get
+			{
+				return this._znizka;
+			}
+			set
+			{
+				if ((this._znizka != value))
+				{
+					this.OnznizkaChanging(value);
+					this.SendPropertyChanging();
+					this._znizka = value;
+					this.SendPropertyChanged("znizka");
+					this.OnznizkaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_discount_rate", DbType="Decimal(5,2) NOT NULL")]
+		public decimal discount_rate
+		{
+			get
+			{
+				return this._discount_rate;
+			}
+			set
+			{
+				if ((this._discount_rate != value))
+				{
+					this.Ondiscount_rateChanging(value);
+					this.SendPropertyChanging();
+					this._discount_rate = value;
+					this.SendPropertyChanged("discount_rate");
+					this.Ondiscount_rateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Client", Storage="_Client", ThisKey="id", OtherKey="id_znizka")]
+		public EntitySet<Client> Client
+		{
+			get
+			{
+				return this._Client;
+			}
+			set
+			{
+				this._Client.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Client(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Discount = this;
+		}
+		
+		private void detach_Client(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Discount = null;
 		}
 	}
 }

@@ -23,8 +23,9 @@
             <Button Grid.Column="0" Grid.Row="0"  Height="40" Width="80" Margin="40,5" Click="Button_Odrzuc" >
                 <TextBlock Text="Odrzuć" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" />
             </Button>
-            <TextBlock Margin="20" FontSize="20" Grid.Column="0" Grid.Row="1" Text="Ważna do:" TextWrapping="Wrap" TextAlignment="Center" />
-            <TextBox Margin="20" FontSize="20" Grid.Column="1" Grid.Row="1"  TextWrapping="Wrap" TextAlignment="Center" />
+            <TextBlock  Grid.Column="0" Grid.Row="1" Margin="20" FontSize="20" Text="Ważna do:" TextWrapping="Wrap" TextAlignment="Center" />
+            <!--<TextBox Margin="20" FontSize="20" Grid.Column="1" Grid.Row="1"  TextWrapping="Wrap" TextAlignment="Center" />-->
+            <DatePicker Height="25" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="42,26,0,0" Name="datePicker1" VerticalAlignment="Top" Width="115" />
 
         </Grid>
         <Button  Height="34"  Margin="457,0,212,0" Click="Button_Zaakceptuj"  >

@@ -42,6 +42,8 @@ namespace IPR_kasa
             this.NavigationService.Navigate(new Uri("PageNumerRezerwacji.xaml", UriKind.Relative));
         }
 
+
+        
         private void Button_Zatwierdz(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("PageZatwierdzZnizke2.xaml", UriKind.Relative));

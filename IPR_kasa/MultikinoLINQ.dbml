@@ -28,4 +28,19 @@
       <Association Name="Seance_Order" Member="Seance" ThisKey="id_seance" OtherKey="id" Type="Seance" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Client" Member="Client">
+    <Type Name="Client">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_znizka" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Discount_Client" Member="Discount" ThisKey="id_znizka" OtherKey="id" Type="Discount" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Discount" Member="Discount">
+    <Type Name="Discount">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="znizka" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="discount_rate" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Discount_Client" Member="Client" ThisKey="id" OtherKey="id_znizka" Type="Client" />
+    </Type>
+  </Table>
 </Database>

@@ -27,6 +27,8 @@ namespace IPR_kasa
 
         private void Button_Zaakceptuj(object sender, RoutedEventArgs e)
         {
+            PageZatwierdzZnizke2.client.id_znizka = 2;
+            addClientToDb(PageZatwierdzZnizke2.client);
             this.NavigationService.Navigate(new Uri("PageWyborFilmu.xaml", UriKind.Relative));
         }
 
@@ -38,6 +40,30 @@ namespace IPR_kasa
         private void Button_Odrzuc(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("PageWyborFilmu.xaml", UriKind.Relative));
+        }
+
+        private void addClientToDb(CClient client)
+        {
+            Client record = new Client();
+
+
+            record.id = client.id;
+            record.id_znizka = client.id_znizka;
+
+            MainWindow.dc.Client.InsertOnSubmit(record);
+            // Submit the change to the database.
+            try
+            {
+                MainWindow.dc.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+               Console.WriteLine(e);
+                // Make some adjustments.
+                // ...
+                // Try again.
+                MainWindow.dc.SubmitChanges();
+            }
         }
     }
 }

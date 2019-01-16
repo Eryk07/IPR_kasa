@@ -29,5 +29,7 @@ namespace IPR_kasa
         {
                 this.NavigationService.Navigate(new Uri("PagePodsumowanie.xaml", UriKind.Relative));
         }
+
+
     }
 }

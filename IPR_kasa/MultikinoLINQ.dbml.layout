@@ -27,11 +27,30 @@
         <elementListCompartment Id="311ca5dc-0e16-41a8-8412-ce8448916e03" absoluteBounds="0.89000000000000012, 1.085, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.8750005 : 3); (3.8750005 : 1.60659912109375); (2.875 : 1.60659912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.875 : 3.78929768880208); (1.8749995 : 3.78929768880208); (1.8749995 : 2.5881982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MultikinoLINQDataContext/Seance/Seance_Order" />
       <nodes>
         <classShapeMoniker Id="8e09d9dc-09db-441e-a7f1-08905f3ceb90" />
         <classShapeMoniker Id="4965352e-0e7a-4403-9124-1acce6c96cda" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="dbfa976a-3179-49f8-b420-662860564da9" absoluteBounds="3.875, 0.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/MultikinoLINQDataContext/Client" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc186074-cc48-461b-8bc7-81d9942ed6f9" absoluteBounds="3.8899999999999997, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2eedce0b-ed3f-42fc-a365-28f5193e8c7f" absoluteBounds="6.75, 0.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/MultikinoLINQDataContext/Discount" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fe60127a-459e-4066-8265-92f5991bc0ff" absoluteBounds="6.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.75 : 1.22199625651042); (5.875 : 1.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MultikinoLINQDataContext/Discount/Discount_Client" />
+      <nodes>
+        <classShapeMoniker Id="2eedce0b-ed3f-42fc-a365-28f5193e8c7f" />
+        <classShapeMoniker Id="dbfa976a-3179-49f8-b420-662860564da9" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

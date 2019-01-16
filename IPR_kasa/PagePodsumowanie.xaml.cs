@@ -68,7 +68,7 @@ namespace IPR_kasa
                                  .ToList()
                                  .FirstOrDefault();
 
-                    record.id = last_id + 1;
+                    record.id = last_id + 100;
                 }
 
                 record.title = order.title;

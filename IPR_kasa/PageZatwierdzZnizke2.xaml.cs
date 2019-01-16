@@ -20,9 +20,11 @@ namespace IPR_kasa
     /// </summary>
     public partial class PageZatwierdzZnizke2 : Page
     {
+        public static CClient client;
         public PageZatwierdzZnizke2()
         {
             InitializeComponent();
+            client = new CClient();
         }
 
         private void Button_Wroc(object sender, RoutedEventArgs e)
@@ -32,7 +34,20 @@ namespace IPR_kasa
 
         private void Button_Zaakceptuj(object sender, RoutedEventArgs e)
         {
+            client.id = Int32.Parse(TxtBox.Text);
             NavigationService.Navigate(new Uri("PageZaakceptujZniżke.xaml", UriKind.Relative));
         }
+        private void TextBox_Focused(object sender, RoutedEventArgs e)
+        {
+            TxtBox.Text = "";
+        }
+
     }
+
+    public class CClient
+    {
+        public int id { get; set; }
+        public int id_znizka { get; set; }
+    }
+
 }
