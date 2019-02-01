@@ -16,18 +16,18 @@ using System.Windows.Shapes;
 namespace IPR_kasa
 {
     /// <summary>
-    /// Logika interakcji dla klasy PageZatwierdzZnizke.xaml
+    /// Logika interakcji dla klasy PageCheckClient.xaml
     /// </summary>
-    public partial class PageZatwierdzZnizke : Page
+    public partial class PageCheckClient : Page
     {
-        public PageZatwierdzZnizke()
+        public PageCheckClient()
         {
             InitializeComponent();
         }
 
         private void Button_Zaakceptuj(object sender, RoutedEventArgs e)
         {
-                this.NavigationService.Navigate(new Uri("PagePodsumowanie.xaml", UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("PageChooseSeat.xaml", UriKind.Relative));
         }
 
 

@@ -17,6 +17,25 @@
       <Association Name="Movie_Seance" Member="Seance" ThisKey="id" OtherKey="id_movie" Type="Seance" />
     </Type>
   </Table>
+  <Table Name="dbo.Discount" Member="Discount">
+    <Type Name="Discount">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="znizka" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="discount_rate" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Association Name="Discount_Client" Member="Client" ThisKey="id" OtherKey="id_znizka" Type="Client" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Client" Member="Client">
+    <Type Name="Client">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="id_znizka" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="surname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="student_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Client_Order" Member="Order" ThisKey="id" OtherKey="id_client" Type="Order" />
+      <Association Name="Discount_Client" Member="Discount" ThisKey="id_znizka" OtherKey="id" Type="Discount" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.[Order]" Member="Order">
     <Type Name="Order">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -25,22 +44,10 @@
       <Column Name="order_time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="id_seance" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="seat_number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_client" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="paid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Client_Order" Member="Client" ThisKey="id_client" OtherKey="id" Type="Client" IsForeignKey="true" />
       <Association Name="Seance_Order" Member="Seance" ThisKey="id_seance" OtherKey="id" Type="Seance" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Client" Member="Client">
-    <Type Name="Client">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="id_znizka" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Discount_Client" Member="Discount" ThisKey="id_znizka" OtherKey="id" Type="Discount" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Discount" Member="Discount">
-    <Type Name="Discount">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="znizka" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="discount_rate" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
-      <Association Name="Discount_Client" Member="Client" ThisKey="id" OtherKey="id_znizka" Type="Client" />
     </Type>
   </Table>
 </Database>

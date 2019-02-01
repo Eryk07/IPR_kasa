@@ -25,7 +25,7 @@ namespace IPR_kasa
         public MainWindow()
         {
             InitializeComponent();
-            Main.Content = new PageWyborFilmu();
+            Main.Content = new PageChooseMovie();
 
         }
     }

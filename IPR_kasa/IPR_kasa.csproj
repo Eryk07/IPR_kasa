@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CDBService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -63,20 +64,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MultikinoLINQ.dbml</DependentUpon>
     </Compile>
-    <Compile Include="PageNumerRezerwacji.xaml.cs">
-      <DependentUpon>PageNumerRezerwacji.xaml</DependentUpon>
+    <Compile Include="PageCheckReservation.xaml.cs">
+      <DependentUpon>PageCheckReservation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PagePodsumowanie.xaml.cs">
-      <DependentUpon>PagePodsumowanie.xaml</DependentUpon>
+    <Compile Include="PageChooseSeat.xaml.cs">
+      <DependentUpon>PageChooseSeat.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageWyborFilmu.xaml.cs">
-      <DependentUpon>PageWyborFilmu.xaml</DependentUpon>
+    <Compile Include="PageChooseMovie.xaml.cs">
+      <DependentUpon>PageChooseMovie.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageZaakceptujZniżke.xaml.cs">
-      <DependentUpon>PageZaakceptujZniżke.xaml</DependentUpon>
+    <Compile Include="PageAcceptStudentDiscount.xaml.cs">
+      <DependentUpon>PageAcceptStudentDiscount.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageZatwierdzZnizke.xaml.cs">
-      <DependentUpon>PageZatwierdzZnizke.xaml</DependentUpon>
+    <Compile Include="PageCheckClient.xaml.cs">
+      <DependentUpon>PageCheckClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -86,34 +87,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageNumerRezerwacji.xaml">
+    <Page Include="PageCheckReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PagePodsumowanie.xaml">
+    <Page Include="PageChooseSeat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageWyborFilmu.xaml">
+    <Page Include="PageChooseMovie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageZaakceptujZniżke.xaml">
+    <Page Include="PageAcceptStudentDiscount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageZatwierdzZnizke.xaml">
+    <Page Include="PageCheckClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageZatwierdzZnizke2.xaml">
+    <Page Include="PageCheckClient2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageZatwierdzZnizke2.xaml.cs">
-      <DependentUpon>PageZatwierdzZnizke2.xaml</DependentUpon>
+    <Compile Include="PageCheckClient2.xaml.cs">
+      <DependentUpon>PageCheckClient2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

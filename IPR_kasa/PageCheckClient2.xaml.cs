@@ -16,12 +16,12 @@ using System.Windows.Shapes;
 namespace IPR_kasa
 {
     /// <summary>
-    /// Logika interakcji dla klasy PageZatwierdzZnizke2.xaml
+    /// Logika interakcji dla klasy PageCheckClient2.xaml
     /// </summary>
-    public partial class PageZatwierdzZnizke2 : Page
+    public partial class PageCheckClient2 : Page
     {
         public static CClient client;
-        public PageZatwierdzZnizke2()
+        public PageCheckClient2()
         {
             InitializeComponent();
             client = new CClient();
@@ -29,13 +29,19 @@ namespace IPR_kasa
 
         private void Button_Wroc(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("PageWyborFilmu.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("PageChooseMovie.xaml", UriKind.Relative));
         }
 
         private void Button_Zaakceptuj(object sender, RoutedEventArgs e)
         {
-            client.id = Int32.Parse(TxtBox.Text);
-            NavigationService.Navigate(new Uri("PageZaakceptujZniżke.xaml", UriKind.Relative));
+            
+            if (CDBService.CheckClient(TxtBox.Text))
+            {
+                client.id = Int32.Parse(TxtBox.Text);
+                NavigationService.Navigate(new Uri("PageAcceptStudentDiscount.xaml", UriKind.Relative));
+            }
+            else
+                MessageBox.Show("Nie ma takiego klienta!");
         }
         private void TextBox_Focused(object sender, RoutedEventArgs e)
         {
@@ -48,6 +54,7 @@ namespace IPR_kasa
     {
         public int id { get; set; }
         public int id_znizka { get; set; }
+        
     }
 
 }

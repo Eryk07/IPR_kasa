@@ -36,15 +36,15 @@ namespace IPR_kasa
     partial void InsertMovie(Movie instance);
     partial void UpdateMovie(Movie instance);
     partial void DeleteMovie(Movie instance);
-    partial void InsertOrder(Order instance);
-    partial void UpdateOrder(Order instance);
-    partial void DeleteOrder(Order instance);
-    partial void InsertClient(Client instance);
-    partial void UpdateClient(Client instance);
-    partial void DeleteClient(Client instance);
     partial void InsertDiscount(Discount instance);
     partial void UpdateDiscount(Discount instance);
     partial void DeleteDiscount(Discount instance);
+    partial void InsertClient(Client instance);
+    partial void UpdateClient(Client instance);
+    partial void DeleteClient(Client instance);
+    partial void InsertOrder(Order instance);
+    partial void UpdateOrder(Order instance);
+    partial void DeleteOrder(Order instance);
     #endregion
 		
 		public MultikinoLINQDataContext() : 
@@ -93,11 +93,11 @@ namespace IPR_kasa
 			}
 		}
 		
-		public System.Data.Linq.Table<Order> Order
+		public System.Data.Linq.Table<Discount> Discount
 		{
 			get
 			{
-				return this.GetTable<Order>();
+				return this.GetTable<Discount>();
 			}
 		}
 		
@@ -109,11 +109,11 @@ namespace IPR_kasa
 			}
 		}
 		
-		public System.Data.Linq.Table<Discount> Discount
+		public System.Data.Linq.Table<Order> Order
 		{
 			get
 			{
-				return this.GetTable<Discount>();
+				return this.GetTable<Order>();
 			}
 		}
 	}
@@ -435,356 +435,6 @@ namespace IPR_kasa
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Order]")]
-	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private System.TimeSpan _seance_time;
-		
-		private System.DateTime _order_time;
-		
-		private int _id_seance;
-		
-		private int _seat_number;
-		
-		private EntityRef<Seance> _Seance;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void Onseance_timeChanging(System.TimeSpan value);
-    partial void Onseance_timeChanged();
-    partial void Onorder_timeChanging(System.DateTime value);
-    partial void Onorder_timeChanged();
-    partial void Onid_seanceChanging(int value);
-    partial void Onid_seanceChanged();
-    partial void Onseat_numberChanging(int value);
-    partial void Onseat_numberChanged();
-    #endregion
-		
-		public Order()
-		{
-			this._Seance = default(EntityRef<Seance>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seance_time", DbType="Time NOT NULL")]
-		public System.TimeSpan seance_time
-		{
-			get
-			{
-				return this._seance_time;
-			}
-			set
-			{
-				if ((this._seance_time != value))
-				{
-					this.Onseance_timeChanging(value);
-					this.SendPropertyChanging();
-					this._seance_time = value;
-					this.SendPropertyChanged("seance_time");
-					this.Onseance_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_time", DbType="DateTime NOT NULL")]
-		public System.DateTime order_time
-		{
-			get
-			{
-				return this._order_time;
-			}
-			set
-			{
-				if ((this._order_time != value))
-				{
-					this.Onorder_timeChanging(value);
-					this.SendPropertyChanging();
-					this._order_time = value;
-					this.SendPropertyChanged("order_time");
-					this.Onorder_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_seance", DbType="Int NOT NULL")]
-		public int id_seance
-		{
-			get
-			{
-				return this._id_seance;
-			}
-			set
-			{
-				if ((this._id_seance != value))
-				{
-					if (this._Seance.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_seanceChanging(value);
-					this.SendPropertyChanging();
-					this._id_seance = value;
-					this.SendPropertyChanged("id_seance");
-					this.Onid_seanceChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seat_number", DbType="Int NOT NULL")]
-		public int seat_number
-		{
-			get
-			{
-				return this._seat_number;
-			}
-			set
-			{
-				if ((this._seat_number != value))
-				{
-					this.Onseat_numberChanging(value);
-					this.SendPropertyChanging();
-					this._seat_number = value;
-					this.SendPropertyChanged("seat_number");
-					this.Onseat_numberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seance_Order", Storage="_Seance", ThisKey="id_seance", OtherKey="id", IsForeignKey=true)]
-		public Seance Seance
-		{
-			get
-			{
-				return this._Seance.Entity;
-			}
-			set
-			{
-				Seance previousValue = this._Seance.Entity;
-				if (((previousValue != value) 
-							|| (this._Seance.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Seance.Entity = null;
-						previousValue.Order.Remove(this);
-					}
-					this._Seance.Entity = value;
-					if ((value != null))
-					{
-						value.Order.Add(this);
-						this._id_seance = value.id;
-					}
-					else
-					{
-						this._id_seance = default(int);
-					}
-					this.SendPropertyChanged("Seance");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
-	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private System.Nullable<int> _id_znizka;
-		
-		private EntityRef<Discount> _Discount;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Onid_znizkaChanging(System.Nullable<int> value);
-    partial void Onid_znizkaChanged();
-    #endregion
-		
-		public Client()
-		{
-			this._Discount = default(EntityRef<Discount>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_znizka", DbType="Int")]
-		public System.Nullable<int> id_znizka
-		{
-			get
-			{
-				return this._id_znizka;
-			}
-			set
-			{
-				if ((this._id_znizka != value))
-				{
-					if (this._Discount.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_znizkaChanging(value);
-					this.SendPropertyChanging();
-					this._id_znizka = value;
-					this.SendPropertyChanged("id_znizka");
-					this.Onid_znizkaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Client", Storage="_Discount", ThisKey="id_znizka", OtherKey="id", IsForeignKey=true)]
-		public Discount Discount
-		{
-			get
-			{
-				return this._Discount.Entity;
-			}
-			set
-			{
-				Discount previousValue = this._Discount.Entity;
-				if (((previousValue != value) 
-							|| (this._Discount.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Discount.Entity = null;
-						previousValue.Client.Remove(this);
-					}
-					this._Discount.Entity = value;
-					if ((value != null))
-					{
-						value.Client.Add(this);
-						this._id_znizka = value.id;
-					}
-					else
-					{
-						this._id_znizka = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Discount");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Discount")]
 	public partial class Discount : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -920,6 +570,545 @@ namespace IPR_kasa
 		{
 			this.SendPropertyChanging();
 			entity.Discount = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Client")]
+	public partial class Client : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Nullable<int> _id_znizka;
+		
+		private string _name;
+		
+		private string _surname;
+		
+		private System.Nullable<System.DateTime> _student_date;
+		
+		private EntitySet<Order> _Order;
+		
+		private EntityRef<Discount> _Discount;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onid_znizkaChanging(System.Nullable<int> value);
+    partial void Onid_znizkaChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnsurnameChanging(string value);
+    partial void OnsurnameChanged();
+    partial void Onstudent_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onstudent_dateChanged();
+    #endregion
+		
+		public Client()
+		{
+			this._Order = new EntitySet<Order>(new Action<Order>(this.attach_Order), new Action<Order>(this.detach_Order));
+			this._Discount = default(EntityRef<Discount>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_znizka", DbType="Int")]
+		public System.Nullable<int> id_znizka
+		{
+			get
+			{
+				return this._id_znizka;
+			}
+			set
+			{
+				if ((this._id_znizka != value))
+				{
+					if (this._Discount.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_znizkaChanging(value);
+					this.SendPropertyChanging();
+					this._id_znizka = value;
+					this.SendPropertyChanged("id_znizka");
+					this.Onid_znizkaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_surname", DbType="VarChar(50)")]
+		public string surname
+		{
+			get
+			{
+				return this._surname;
+			}
+			set
+			{
+				if ((this._surname != value))
+				{
+					this.OnsurnameChanging(value);
+					this.SendPropertyChanging();
+					this._surname = value;
+					this.SendPropertyChanged("surname");
+					this.OnsurnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_student_date", DbType="Date")]
+		public System.Nullable<System.DateTime> student_date
+		{
+			get
+			{
+				return this._student_date;
+			}
+			set
+			{
+				if ((this._student_date != value))
+				{
+					this.Onstudent_dateChanging(value);
+					this.SendPropertyChanging();
+					this._student_date = value;
+					this.SendPropertyChanged("student_date");
+					this.Onstudent_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Order", Storage="_Order", ThisKey="id", OtherKey="id_client")]
+		public EntitySet<Order> Order
+		{
+			get
+			{
+				return this._Order;
+			}
+			set
+			{
+				this._Order.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Client", Storage="_Discount", ThisKey="id_znizka", OtherKey="id", IsForeignKey=true)]
+		public Discount Discount
+		{
+			get
+			{
+				return this._Discount.Entity;
+			}
+			set
+			{
+				Discount previousValue = this._Discount.Entity;
+				if (((previousValue != value) 
+							|| (this._Discount.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Discount.Entity = null;
+						previousValue.Client.Remove(this);
+					}
+					this._Discount.Entity = value;
+					if ((value != null))
+					{
+						value.Client.Add(this);
+						this._id_znizka = value.id;
+					}
+					else
+					{
+						this._id_znizka = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Discount");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Order(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = this;
+		}
+		
+		private void detach_Order(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Client = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Order]")]
+	public partial class Order : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.TimeSpan _seance_time;
+		
+		private System.DateTime _order_time;
+		
+		private int _id_seance;
+		
+		private int _seat_number;
+		
+		private System.Nullable<int> _id_client;
+		
+		private System.Nullable<bool> _paid;
+		
+		private EntityRef<Client> _Client;
+		
+		private EntityRef<Seance> _Seance;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onseance_timeChanging(System.TimeSpan value);
+    partial void Onseance_timeChanged();
+    partial void Onorder_timeChanging(System.DateTime value);
+    partial void Onorder_timeChanged();
+    partial void Onid_seanceChanging(int value);
+    partial void Onid_seanceChanged();
+    partial void Onseat_numberChanging(int value);
+    partial void Onseat_numberChanged();
+    partial void Onid_clientChanging(System.Nullable<int> value);
+    partial void Onid_clientChanged();
+    partial void OnpaidChanging(System.Nullable<bool> value);
+    partial void OnpaidChanged();
+    #endregion
+		
+		public Order()
+		{
+			this._Client = default(EntityRef<Client>);
+			this._Seance = default(EntityRef<Seance>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seance_time", DbType="Time NOT NULL")]
+		public System.TimeSpan seance_time
+		{
+			get
+			{
+				return this._seance_time;
+			}
+			set
+			{
+				if ((this._seance_time != value))
+				{
+					this.Onseance_timeChanging(value);
+					this.SendPropertyChanging();
+					this._seance_time = value;
+					this.SendPropertyChanged("seance_time");
+					this.Onseance_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_time", DbType="DateTime NOT NULL")]
+		public System.DateTime order_time
+		{
+			get
+			{
+				return this._order_time;
+			}
+			set
+			{
+				if ((this._order_time != value))
+				{
+					this.Onorder_timeChanging(value);
+					this.SendPropertyChanging();
+					this._order_time = value;
+					this.SendPropertyChanged("order_time");
+					this.Onorder_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_seance", DbType="Int NOT NULL")]
+		public int id_seance
+		{
+			get
+			{
+				return this._id_seance;
+			}
+			set
+			{
+				if ((this._id_seance != value))
+				{
+					if (this._Seance.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_seanceChanging(value);
+					this.SendPropertyChanging();
+					this._id_seance = value;
+					this.SendPropertyChanged("id_seance");
+					this.Onid_seanceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seat_number", DbType="Int NOT NULL")]
+		public int seat_number
+		{
+			get
+			{
+				return this._seat_number;
+			}
+			set
+			{
+				if ((this._seat_number != value))
+				{
+					this.Onseat_numberChanging(value);
+					this.SendPropertyChanging();
+					this._seat_number = value;
+					this.SendPropertyChanged("seat_number");
+					this.Onseat_numberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_client", DbType="Int")]
+		public System.Nullable<int> id_client
+		{
+			get
+			{
+				return this._id_client;
+			}
+			set
+			{
+				if ((this._id_client != value))
+				{
+					if (this._Client.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_clientChanging(value);
+					this.SendPropertyChanging();
+					this._id_client = value;
+					this.SendPropertyChanged("id_client");
+					this.Onid_clientChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_paid", DbType="Bit")]
+		public System.Nullable<bool> paid
+		{
+			get
+			{
+				return this._paid;
+			}
+			set
+			{
+				if ((this._paid != value))
+				{
+					this.OnpaidChanging(value);
+					this.SendPropertyChanging();
+					this._paid = value;
+					this.SendPropertyChanged("paid");
+					this.OnpaidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Order", Storage="_Client", ThisKey="id_client", OtherKey="id", IsForeignKey=true)]
+		public Client Client
+		{
+			get
+			{
+				return this._Client.Entity;
+			}
+			set
+			{
+				Client previousValue = this._Client.Entity;
+				if (((previousValue != value) 
+							|| (this._Client.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Client.Entity = null;
+						previousValue.Order.Remove(this);
+					}
+					this._Client.Entity = value;
+					if ((value != null))
+					{
+						value.Order.Add(this);
+						this._id_client = value.id;
+					}
+					else
+					{
+						this._id_client = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Seance_Order", Storage="_Seance", ThisKey="id_seance", OtherKey="id", IsForeignKey=true)]
+		public Seance Seance
+		{
+			get
+			{
+				return this._Seance.Entity;
+			}
+			set
+			{
+				Seance previousValue = this._Seance.Entity;
+				if (((previousValue != value) 
+							|| (this._Seance.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Seance.Entity = null;
+						previousValue.Order.Remove(this);
+					}
+					this._Seance.Entity = value;
+					if ((value != null))
+					{
+						value.Order.Add(this);
+						this._id_seance = value.id;
+					}
+					else
+					{
+						this._id_seance = default(int);
+					}
+					this.SendPropertyChanged("Seance");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

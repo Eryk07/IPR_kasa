@@ -16,30 +16,30 @@ using System.Windows.Shapes;
 namespace IPR_kasa
 {
     /// <summary>
-    /// Logika interakcji dla klasy PageZaakceptujZniżke.xaml
+    /// Logika interakcji dla klasy PageAcceptStudentDiscount.xaml
     /// </summary>
-    public partial class PageZaakceptujZniżke : Page
+    public partial class PageAcceptStudentDiscount : Page
     {
-        public PageZaakceptujZniżke()
+        public PageAcceptStudentDiscount()
         {
             InitializeComponent();
         }
 
         private void Button_Zaakceptuj(object sender, RoutedEventArgs e)
         {
-            PageZatwierdzZnizke2.client.id_znizka = 2;
-            addClientToDb(PageZatwierdzZnizke2.client);
-            this.NavigationService.Navigate(new Uri("PageWyborFilmu.xaml", UriKind.Relative));
+            PageCheckClient2.client.id_znizka = 2;
+            addClientToDb(PageCheckClient2.client);
+            this.NavigationService.Navigate(new Uri("PageChooseMovie.xaml", UriKind.Relative));
         }
 
         private void Button_Wroc(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("PageZatwierdzZnizke2.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("PageCheckClient2.xaml", UriKind.Relative));
         }
 
         private void Button_Odrzuc(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("PageWyborFilmu.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("PageChooseMovie.xaml", UriKind.Relative));
         }
 
         private void addClientToDb(CClient client)

@@ -19,19 +19,24 @@ using System.Windows.Shapes;
 namespace IPR_kasa
 {
     /// <summary>
-    /// Logika interakcji dla klasy PageWyborFilmu.xaml
+    /// Logika interakcji dla klasy PageChooseMovie.xaml
     /// </summary>
-    public partial class PageWyborFilmu : Page
+    public partial class PageChooseMovie : Page
     {
         public static COrder order { get; set; }
         private bool titleSelected = false;
-        public PageWyborFilmu()
+        public PageChooseMovie()
         {
             InitializeComponent();
-            if (MainWindow.dc.DatabaseExists()) {
-                Dictionary<string, List<string>> MoviesDict = 
-                WriteSeances();
-
+            if (MainWindow.dc.DatabaseExists())
+            {
+                List<CSeance> tmplist= CDBService.ReadSeancesFromDatabase();
+                Dictionary<string, List<string>> MoviesDict = new Dictionary<string, List<string>>();
+                foreach (CSeance i in tmplist)
+                {
+                    MoviesDict.Add(i.title,i.hoursList);
+                }
+             
                 DataContext = MoviesDict;
             }
             order = new COrder();
@@ -39,14 +44,14 @@ namespace IPR_kasa
 
         private void Button_Realizuj(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("PageNumerRezerwacji.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("PageCheckReservation.xaml", UriKind.Relative));
         }
 
 
         
         private void Button_Zatwierdz(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("PageZatwierdzZnizke2.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("PageCheckClient2.xaml", UriKind.Relative));
         }
 
         private void Button_Tytul(object sender, RoutedEventArgs e)
@@ -88,7 +93,7 @@ namespace IPR_kasa
                     order.id_seance = seance_id;
 
                 }
-                this.NavigationService.Navigate(new Uri("PagePodsumowanie.xaml", UriKind.Relative));
+                this.NavigationService.Navigate(new Uri("PageChooseSeat.xaml", UriKind.Relative));
             }
             else
             {
@@ -138,9 +143,9 @@ namespace IPR_kasa
         public CSeance(int id)
         {
             
-
-            using (var db = new MultikinoLINQDataContext(
+           using (var db = new MultikinoLINQDataContext(
             Properties.Settings.Default.MultikinoConnectionString))
+         //   using (var db = MainWindow.dc)
             {
                 var seances = db.Seance
                 .Where(o => o.id_movie == id && o.date == DateTime.Today)

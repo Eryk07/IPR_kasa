@@ -18,9 +18,9 @@ namespace IPR_kasa
     /// <summary>
     /// Logika interakcji dla klasy PageMenu.xaml
     /// </summary>
-    public partial class PageNumerRezerwacji : Page
+    public partial class PageCheckReservation : Page
     {
-        public PageNumerRezerwacji()
+        public PageCheckReservation()
         {
             
             InitializeComponent();
@@ -29,7 +29,7 @@ namespace IPR_kasa
 
         private void Button_Wroc(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("PageWyborFilmu.xaml", UriKind.Relative));
+            this.NavigationService.Navigate(new Uri("PageChooseMovie.xaml", UriKind.Relative));
         }
 
         private void Button_Zrealizuj(object sender, RoutedEventArgs e)
