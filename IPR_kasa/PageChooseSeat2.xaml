@@ -1,4 +1,4 @@
-﻿<Page x:Class="IPR_kasa.PageChooseSeat"
+﻿<Page x:Class="IPR_kasa.PageChooseSeat2"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageChooseSeat">
+      Title="PageChooseSeat2">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <ToggleButton  Content="{Binding id}" BorderBrush="Black" BorderThickness="0.7"  Width="28" Height="35" Background="Green" x:Name="seatBtn" Checked="Seat_Click" Unchecked="SeatHandleUncheck" >
+                            <ToggleButton  Content="{Binding id}" Checked = "SeatHandleCheck" BorderBrush="Black" BorderThickness="0.7"  Width="28" Height="35" Background="Green" x:Name="seatBtn" Click="Seat_Click">
                                 <ToggleButton.Style>
                                     <Style TargetType="{x:Type ToggleButton}">
                                         <Style.Triggers>
@@ -50,15 +50,14 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <!--<Button Content="Zatwierdź miejsca" Height="30" Margin="131,50,127,0"  Click="Zatwierdz_Miejsca_Click" RenderTransformOrigin="0.5,0.5"/>-->
-            <Button Content="Wróć" Height="30"  Margin="131,10,127,0" Click="Wroc_Click" RenderTransformOrigin="0.5,0.5"/>
+            <Button Content="Wróć" Height="30"  Margin="131,100,127,0" Click="Wroc_Click" RenderTransformOrigin="0.5,0.5"/>
         </StackPanel>
 
         <StackPanel Grid.Column="1">
             <Label FontWeight="Bold" Name="titleLbl" HorizontalAlignment="Center" Margin="86,20,86,1" />
-            <StackPanel Orientation="Horizontal" Height="320">
-                <StackPanel Margin="86,27,8,38" Width="259" >
-                    <Label Content="Miejsce, zniżka:" />
+            <StackPanel Orientation="Horizontal" Height="170">
+                <StackPanel Margin="86,10,8,10" Height="130" Width="259" >
+                    <Label Content="Miejsce:" />
                     <ItemsControl ItemsSource="{Binding}" Name="seatsList">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -67,11 +66,9 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Name="summaryStack" Margin="0,10,0,0">
-                                    <Border BorderBrush="Black" BorderThickness="0.7" Background="CornflowerBlue" Width="28" Height="35"  >
-                                        <TextBlock Text="{Binding id}" Name="summaryTxt" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ComboBox  Height="35" Width="100" Margin="20,0,0,0" SelectionChanged="ComboBox_SelectionChanged" DropDownClosed="ComboBox_DropDownClosed">
+                                <StackPanel Orientation="Horizontal" Name="summaryStack">
+                                    <TextBlock Text="{Binding id}" Name="summaryTxt" />
+                                    <ComboBox  Height="30" Margin="20,0,0,0">
                                         <ComboBoxItem IsSelected="True">Normalny</ComboBoxItem>
                                         <ComboBoxItem>Student</ComboBoxItem>
                                         <ComboBoxItem>Twoja zniżka</ComboBoxItem>
@@ -82,7 +79,7 @@
                     </ItemsControl>
                 </StackPanel>
             </StackPanel>
-            <Button Content="Zaakceptuj" Height="30"  Margin="195,0,70,0" Click="Zaakceptuj_Click"  />
+            <Button Content="Zaakceptuj" Width="141" Height="30"  Margin="186,100,17,0" Click="Zaakceptuj_Click"  />
 
         </StackPanel>
     </Grid>

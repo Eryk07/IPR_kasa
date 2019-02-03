@@ -54,6 +54,7 @@ namespace IPR_kasa
     {
         public int id { get; set; }
         public int id_znizka { get; set; }
+        public DateTime exp_date { get; set; }
         
     }
 

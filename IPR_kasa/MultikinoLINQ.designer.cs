@@ -449,6 +449,8 @@ namespace IPR_kasa
 		
 		private EntitySet<Client> _Client;
 		
+		private EntitySet<Order> _Order;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -464,6 +466,7 @@ namespace IPR_kasa
 		public Discount()
 		{
 			this._Client = new EntitySet<Client>(new Action<Client>(this.attach_Client), new Action<Client>(this.detach_Client));
+			this._Order = new EntitySet<Order>(new Action<Order>(this.attach_Order), new Action<Order>(this.detach_Order));
 			OnCreated();
 		}
 		
@@ -540,6 +543,19 @@ namespace IPR_kasa
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Order", Storage="_Order", ThisKey="id", OtherKey="id_discount")]
+		public EntitySet<Order> Order
+		{
+			get
+			{
+				return this._Order;
+			}
+			set
+			{
+				this._Order.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -567,6 +583,18 @@ namespace IPR_kasa
 		}
 		
 		private void detach_Client(Client entity)
+		{
+			this.SendPropertyChanging();
+			entity.Discount = null;
+		}
+		
+		private void attach_Order(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Discount = this;
+		}
+		
+		private void detach_Order(Order entity)
 		{
 			this.SendPropertyChanging();
 			entity.Discount = null;
@@ -822,7 +850,11 @@ namespace IPR_kasa
 		
 		private System.Nullable<bool> _paid;
 		
+		private System.Nullable<int> _id_discount;
+		
 		private EntityRef<Client> _Client;
+		
+		private EntityRef<Discount> _Discount;
 		
 		private EntityRef<Seance> _Seance;
 		
@@ -846,11 +878,14 @@ namespace IPR_kasa
     partial void Onid_clientChanged();
     partial void OnpaidChanging(System.Nullable<bool> value);
     partial void OnpaidChanged();
+    partial void Onid_discountChanging(System.Nullable<int> value);
+    partial void Onid_discountChanged();
     #endregion
 		
 		public Order()
 		{
 			this._Client = default(EntityRef<Client>);
+			this._Discount = default(EntityRef<Discount>);
 			this._Seance = default(EntityRef<Seance>);
 			OnCreated();
 		}
@@ -1023,6 +1058,30 @@ namespace IPR_kasa
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_discount", DbType="Int")]
+		public System.Nullable<int> id_discount
+		{
+			get
+			{
+				return this._id_discount;
+			}
+			set
+			{
+				if ((this._id_discount != value))
+				{
+					if (this._Discount.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_discountChanging(value);
+					this.SendPropertyChanging();
+					this._id_discount = value;
+					this.SendPropertyChanged("id_discount");
+					this.Onid_discountChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Client_Order", Storage="_Client", ThisKey="id_client", OtherKey="id", IsForeignKey=true)]
 		public Client Client
 		{
@@ -1053,6 +1112,40 @@ namespace IPR_kasa
 						this._id_client = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Client");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Discount_Order", Storage="_Discount", ThisKey="id_discount", OtherKey="id", IsForeignKey=true)]
+		public Discount Discount
+		{
+			get
+			{
+				return this._Discount.Entity;
+			}
+			set
+			{
+				Discount previousValue = this._Discount.Entity;
+				if (((previousValue != value) 
+							|| (this._Discount.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Discount.Entity = null;
+						previousValue.Order.Remove(this);
+					}
+					this._Discount.Entity = value;
+					if ((value != null))
+					{
+						value.Order.Add(this);
+						this._id_discount = value.id;
+					}
+					else
+					{
+						this._id_discount = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Discount");
 				}
 			}
 		}

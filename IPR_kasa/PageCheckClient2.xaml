@@ -9,7 +9,7 @@
       Title="PageCheckClient2">
 
     <StackPanel>
-        <TextBox x:Name="TxtBox" GotFocus="TextBox_Focused" Text="Wprowadź numer klienta" FontSize="23" TextAlignment="Center" Margin="125,103,132,10" Height="52" HorizontalAlignment="Center" VerticalAlignment="Center" Width="543"/>
+        <TextBox x:Name="TxtBox" GotFocus="TextBox_Focused" Text="Wprowadź numer klienta" FontSize="23" TextAlignment="Center" Margin="160,103,160,10" Height="52" HorizontalAlignment="Center" VerticalAlignment="Center" Width="474"/>
         <StackPanel Orientation="Horizontal" Margin="233,40,230,40" Height="89">
             <Button  Height="60" Width="80" Margin="40,14,40,15" Click="Button_Wroc">
                 <TextBlock Text="Wróć" TextWrapping="Wrap" TextAlignment="Center" />

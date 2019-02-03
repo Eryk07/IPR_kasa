@@ -27,37 +27,44 @@
         <elementListCompartment Id="fe60127a-459e-4066-8265-92f5991bc0ff" absoluteBounds="6.765, 1.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a691932a-8f29-4f8f-ac88-ca3c350d8d2b" absoluteBounds="4.125, 0.625, 2, 1.7708968098958331">
+    <classShape Id="a691932a-8f29-4f8f-ac88-ca3c350d8d2b" absoluteBounds="4, 0.5, 2, 1.7708968098958331">
       <DataClassMoniker Name="/MultikinoLINQDataContext/Client" />
       <nestedChildShapes>
-        <elementListCompartment Id="50f1a72f-0110-468e-a66e-bfddd45c42e4" absoluteBounds="4.14, 1.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="50f1a72f-0110-468e-a66e-bfddd45c42e4" absoluteBounds="4.015, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6.75 : 1.44314697265625); (6.125 : 1.44314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6.75 : 1.44314697265625); (6 : 1.44314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MultikinoLINQDataContext/Discount/Discount_Client" />
       <nodes>
         <classShapeMoniker Id="2eedce0b-ed3f-42fc-a365-28f5193e8c7f" />
         <classShapeMoniker Id="a691932a-8f29-4f8f-ac88-ca3c350d8d2b" />
       </nodes>
     </associationConnector>
-    <classShape Id="1a242306-44b4-4872-883a-df0c5c59b38e" absoluteBounds="0.875, 0.5, 2, 2.3478011067708335">
+    <classShape Id="a5acd9f7-4872-4fdf-a544-160861cb831c" absoluteBounds="0.5, 0.5, 2, 2.5401025390625">
       <DataClassMoniker Name="/MultikinoLINQDataContext/Order" />
       <nestedChildShapes>
-        <elementListCompartment Id="63aa7e91-ac1f-45ab-975b-cf7fbf0230cc" absoluteBounds="0.89000000000000012, 0.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="51b7ebff-ea02-4c1f-8afd-6f425cf74e47" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.125 : 1.51044840494792); (2.875 : 1.51044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4 : 1.38544840494792); (2.5 : 1.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MultikinoLINQDataContext/Client/Client_Order" />
       <nodes>
         <classShapeMoniker Id="a691932a-8f29-4f8f-ac88-ca3c350d8d2b" />
-        <classShapeMoniker Id="1a242306-44b4-4872-883a-df0c5c59b38e" />
+        <classShapeMoniker Id="a5acd9f7-4872-4fdf-a544-160861cb831c" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(3.5 : 3); (3.5 : 2.21037675585937); (2.875 : 2.21037675585937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.34375 : 2.1362939453125); (8.34375 : 2.51044840494792); (2.5 : 2.51044840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MultikinoLINQDataContext/Discount/Discount_Order" />
+      <nodes>
+        <classShapeMoniker Id="2eedce0b-ed3f-42fc-a365-28f5193e8c7f" />
+        <classShapeMoniker Id="a5acd9f7-4872-4fdf-a544-160861cb831c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.875 : 3); (3.875 : 2.81421674435963); (2.5 : 2.81421674435963)]" fixedFrom="Algorithm" fixedTo="Caller">
       <AssociationMoniker Name="/MultikinoLINQDataContext/Seance/Seance_Order" />
       <nodes>
         <classShapeMoniker Id="8e09d9dc-09db-441e-a7f1-08905f3ceb90" />
-        <classShapeMoniker Id="1a242306-44b4-4872-883a-df0c5c59b38e" />
+        <classShapeMoniker Id="a5acd9f7-4872-4fdf-a544-160861cb831c" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

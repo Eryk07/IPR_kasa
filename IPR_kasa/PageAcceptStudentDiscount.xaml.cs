@@ -23,12 +23,16 @@ namespace IPR_kasa
         public PageAcceptStudentDiscount()
         {
             InitializeComponent();
+            clientLbl.Content = CDBService.ShowClientName(PageCheckClient2.client.id);
         }
 
         private void Button_Zaakceptuj(object sender, RoutedEventArgs e)
         {
             PageCheckClient2.client.id_znizka = 2;
-            addClientToDb(PageCheckClient2.client);
+            PageCheckClient2.client.exp_date = (DateTime)datePicker1.SelectedDate;
+            
+            CDBService.AddDiscountToClientDB(PageCheckClient2.client);
+            
             this.NavigationService.Navigate(new Uri("PageChooseMovie.xaml", UriKind.Relative));
         }
 
@@ -40,30 +44,6 @@ namespace IPR_kasa
         private void Button_Odrzuc(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("PageChooseMovie.xaml", UriKind.Relative));
-        }
-
-        private void addClientToDb(CClient client)
-        {
-            Client record = new Client();
-
-
-            record.id = client.id;
-            record.id_znizka = client.id_znizka;
-
-            MainWindow.dc.Client.InsertOnSubmit(record);
-            // Submit the change to the database.
-            try
-            {
-                MainWindow.dc.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-               Console.WriteLine(e);
-                // Make some adjustments.
-                // ...
-                // Try again.
-                MainWindow.dc.SubmitChanges();
-            }
         }
     }
 }

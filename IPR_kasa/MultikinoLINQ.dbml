@@ -23,6 +23,7 @@
       <Column Name="znizka" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="discount_rate" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
       <Association Name="Discount_Client" Member="Client" ThisKey="id" OtherKey="id_znizka" Type="Client" />
+      <Association Name="Discount_Order" Member="Order" ThisKey="id" OtherKey="id_discount" Type="Order" />
     </Type>
   </Table>
   <Table Name="dbo.Client" Member="Client">
@@ -46,7 +47,9 @@
       <Column Name="seat_number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="id_client" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="paid" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="id_discount" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Client_Order" Member="Client" ThisKey="id_client" OtherKey="id" Type="Client" IsForeignKey="true" />
+      <Association Name="Discount_Order" Member="Discount" ThisKey="id_discount" OtherKey="id" Type="Discount" IsForeignKey="true" />
       <Association Name="Seance_Order" Member="Seance" ThisKey="id_seance" OtherKey="id" Type="Seance" IsForeignKey="true" />
     </Type>
   </Table>

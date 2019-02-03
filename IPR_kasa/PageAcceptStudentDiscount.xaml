@@ -9,8 +9,12 @@
       Title="PageAcceptStudentDiscount">
 
     <StackPanel>
-        <Label Content="Zniżka studencka" FontSize="23"  Margin="300,50,300,10" Height="44"/>
-        <Grid Margin="215,40,230,40" Height="136">
+        <Label Content="Zniżka studencka" FontSize="23" Margin="300,50,300,10" Height="44"/>
+        <StackPanel Margin="260,10,212,10" Orientation="Horizontal">
+            <Label FontSize="15" Content="Składający podanie: " Width="143"/>
+            <Label FontSize="15" HorizontalAlignment="Center" Name="clientLbl" FontWeight="Bold" />
+        </StackPanel>
+        <Grid Margin="215,10,230,40" Height="136">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -25,11 +29,11 @@
             </Button>
             <TextBlock  Grid.Column="0" Grid.Row="1" Margin="20" FontSize="20" Text="Ważna do:" TextWrapping="Wrap" TextAlignment="Center" />
             <!--<TextBox Margin="20" FontSize="20" Grid.Column="1" Grid.Row="1"  TextWrapping="Wrap" TextAlignment="Center" />-->
-            <DatePicker Height="25" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="42,26,0,0" Name="datePicker1" VerticalAlignment="Top" Width="115" />
+            <DatePicker Height="25" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="42,26,0,0" x:Name="datePicker1" VerticalAlignment="Top" Width="115" />
 
         </Grid>
         <Button  Height="34"  Margin="457,0,212,0" Click="Button_Zaakceptuj"  >
-            <TextBlock Text="Zaakceptuj" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" Width="113" />
+            <TextBlock Text="Zaakceptuj" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" Width="113" RenderTransformOrigin="0.448,-0.547" />
         </Button>
         <Button  Height="34"  Margin="70,0,632,0" Click="Button_Wroc"  >
             <TextBlock Text="Wróć" FontSize="20" TextWrapping="Wrap" TextAlignment="Center" />

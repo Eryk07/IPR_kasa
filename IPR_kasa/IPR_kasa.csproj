@@ -67,6 +67,9 @@
     <Compile Include="PageCheckReservation.xaml.cs">
       <DependentUpon>PageCheckReservation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PageChooseSeat2.xaml.cs">
+      <DependentUpon>PageChooseSeat2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PageChooseSeat.xaml.cs">
       <DependentUpon>PageChooseSeat.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
     <Page Include="PageCheckReservation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageChooseSeat2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PageChooseSeat.xaml">
       <SubType>Designer</SubType>

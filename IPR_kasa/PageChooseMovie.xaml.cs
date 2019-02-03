@@ -74,25 +74,7 @@ namespace IPR_kasa
             // string tilte  = dict.Key; 
             if (titleSelected)
             {
-                using (var db = new MultikinoLINQDataContext(
-                Properties.Settings.Default.MultikinoConnectionString))
-                {
-                    var movie_id = db
-                                 .Movie
-                                 //.Where(x => System.Data.Linq.SqlClient.SqlMethods.Like(x.title, order.title))
-                                 .Where(x => x.title.Equals(order.title))
-                                 .Select(x => x.id)
-                                 .ToList()
-                                 .FirstOrDefault();
-                    var seance_id = db
-                                 .Seance
-                                 .Where(x => x.id_movie == movie_id && x.time == TimeSpan.Parse(order.seance_time) && x.date == DateTime.Today)
-                                 .Select(x => x.id)
-                                 .ToList()
-                                 .FirstOrDefault();
-                    order.id_seance = seance_id;
-
-                }
+                CDBService.ChooseSeance(order);
                 this.NavigationService.Navigate(new Uri("PageChooseSeat.xaml", UriKind.Relative));
             }
             else
@@ -171,14 +153,14 @@ namespace IPR_kasa
         public string seance_time { get; set; }
         public int id_seance { get; set; }
         public List<int> seat_id { get; set; }
-
+        public bool paid { get; set; }
 
         public COrder()
         {
             this.title = "";
             this.seance_time = "";
             this.seat_id = new List<int>();
-
+            this.paid = false;
         }
     }
     
